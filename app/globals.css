@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth theme + text/background animation */
+body {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+/* Testimonials transition */
+.testimonial {
+  opacity: 0;
+  transform: translateY(10px);
+  position: absolute;
+  inset: 0;
+  padding: 22px 20px 26px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.testimonial.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+}
+
+/* Project reveal */
+.project-card {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.project-card.project-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Initial section reveal */
+.reveal-about,
+.reveal-services,
+.reveal-stack,
+.reveal-panel,
+.reveal-testimonials,
+.reveal-contact {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.visible-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Success checkmark animation */
+.check-path {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: checkDraw 0.4s ease-out forwards;
+}
+@keyframes checkDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Magnetic hover upgrade */
+.btn-magnetic {
+  transition:
+    transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.25s,
+    color 0.25s,
+    border 0.25s;
+}
+
+/* Click micro interaction */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Active nav visual */
+.nav-link.active-link {
+  color: var(--text);
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.16);
+}
+
+/* Scroll glow effect */
+#scrollProgress {
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* HTML body structure */
+html, body {
+  height: 100%;
+}
