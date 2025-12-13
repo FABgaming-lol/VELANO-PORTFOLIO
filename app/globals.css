@@ -22,16 +22,24 @@ body {
 }
 
 /* -------------------------
-   Typography discipline
+   Typography (technical elite)
 -------------------------- */
 
 @layer base {
   body {
-    @apply antialiased leading-relaxed;
+    @apply antialiased leading-[1.65] tracking-[-0.01em];
   }
 
-  h1, h2, h3, h4 {
-    @apply tracking-tight;
+  h1 {
+    @apply leading-[1.1] tracking-[-0.02em];
+  }
+
+  h2 {
+    @apply leading-[1.2] tracking-[-0.015em];
+  }
+
+  p {
+    @apply text-[1.05rem];
   }
 }
 
@@ -40,19 +48,19 @@ body {
 -------------------------- */
 
 .section {
-  @apply px-6 py-24 md:py-32;
+  @apply px-6 py-section md:py-section-md;
 }
 
 /* -------------------------
-   Reveal animation (single system)
+   Reveal system
 -------------------------- */
 
 .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -62,7 +70,7 @@ body {
 }
 
 /* -------------------------
-   Interactive elements
+   Interactions
 -------------------------- */
 
 a,
@@ -78,7 +86,7 @@ button:active {
 }
 
 /* -------------------------
-   Subtle depth (authority-safe)
+   Subtle depth
 -------------------------- */
 
 .card {
@@ -91,10 +99,6 @@ button:active {
   transform: translateY(-4px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
-
-/* -------------------------
-   Dark mode tuning
--------------------------- */
 
 .dark .card:hover {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
