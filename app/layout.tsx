@@ -21,9 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-main text-white antialiased`}>
-        <AvoliroShell>
-          {children}
-        </AvoliroShell>
+        <AvoliroShell>{children}</AvoliroShell>
       </body>
     </html>
   );
@@ -35,7 +33,7 @@ function AvoliroShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       {/* GLOBAL AVOLIRO HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-black/50 border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-black/55 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-sm font-semibold tracking-widest">
@@ -46,27 +44,22 @@ function AvoliroShell({ children }: { children: React.ReactNode }) {
             </span>
           </div>
 
+          {/* Division Switcher (future-ready) */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-gray-400">
-            <span className="text-white">
-              Velano
-            </span>
-            <span>InkForge</span>
-            <span>Labs</span>
+            <span className="text-white cursor-default">Velano</span>
+            <span className="cursor-not-allowed opacity-60">InkForge</span>
+            <span className="cursor-not-allowed opacity-60">Labs</span>
           </nav>
         </div>
       </header>
 
       {/* CONTENT */}
-      <main className="pt-16">
-        {children}
-      </main>
+      <main className="pt-16">{children}</main>
 
-      {/* GLOBAL AVOLIRO FOOTER */}
-      <footer className="border-t border-white/10 py-12 mt-24">
+      {/* GLOBAL FOOTER */}
+      <footer className="border-t border-white/10 py-14 mt-28">
         <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
-          <p>
-            © {new Date().getFullYear()} AVOLIRO
-          </p>
+          <p>© {new Date().getFullYear()} AVOLIRO</p>
           <p className="mt-2">
             Engineering digital systems across design, development, and growth.
           </p>

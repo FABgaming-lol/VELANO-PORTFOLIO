@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* =========================
-   AVOLIRO SYSTEM TOKENS
+   AVOLIRO DESIGN TOKENS
 ========================= */
 :root {
   --bg-main: #0b0d10;
@@ -12,6 +12,9 @@
   --accent: #e10600;
 }
 
+/* =========================
+   BASE
+========================= */
 html,
 body {
   height: 100%;
@@ -55,7 +58,7 @@ body {
 }
 
 /* =========================
-   DEPTH
+   DEPTH & UI
 ========================= */
 .depth {
   box-shadow:
@@ -79,12 +82,4 @@ body {
 ========================= */
 .magnetic {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* =================
-   AVOLIRO SHELL
-================= */
-nav span {
-  cursor: default;
-
-}
 }
