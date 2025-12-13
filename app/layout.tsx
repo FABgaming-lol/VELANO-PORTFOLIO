@@ -8,9 +8,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "VELANO — Digital Systems & Web Infrastructure",
+  title: "VELANO — Digital Systems Engineering",
   description:
-    "Velano engineers high-performance digital systems for brands that demand clarity, authority, and scale.",
+    "Velano engineers high-performance digital systems for brands that value precision, authority, and scale.",
   metadataBase: new URL("https://velano.dev"),
   openGraph: {
     title: "VELANO",
@@ -26,10 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.className} bg-surface-light text-text-primary-light dark:bg-surface-dark dark:text-text-primary-dark antialiased transition-colors duration-300`}
-      >
+    <html lang="en">
+      <body className={`${inter.className} bg-black text-white antialiased`}>
         <div className="relative min-h-screen overflow-x-hidden">
           {children}
         </div>
