@@ -1,8 +1,8 @@
 export default function Page() {
   return (
-    <main className="bg-black text-white">
+    <main className="bg-black text-white min-h-screen">
 
-      {/* HERO — FULL VIEWPORT */}
+      {/* HERO */}
       <section className="min-h-screen flex items-center px-6">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
