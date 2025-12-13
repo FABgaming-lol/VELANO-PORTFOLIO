@@ -1,75 +1,30 @@
 "use client";
 
-import { motion, useScroll, useMotionValue } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-/* ================= ANIMATION ================= */
+/* ===== ANIMATION ===== */
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 1) => ({
+  hidden: { opacity: 0, y: 32 },
+  visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      delay: 0.12 * i,
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  }),
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
 };
 
-/* ================= COUNT UP ================= */
-
-function CountUp({ value }: { value: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [display, setDisplay] = useState(0);
-  const motionValue = useMotionValue(0);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end center"],
-  });
-
-  useEffect(() => {
-    const unsubScroll = scrollYProgress.on("change", (latest) => {
-      motionValue.set(Math.floor(latest * value));
-    });
-
-    const unsubMotion = motionValue.on("change", (latest) => {
-      setDisplay(Math.min(latest, value));
-    });
-
-    return () => {
-      unsubScroll();
-      unsubMotion();
-    };
-  }, [motionValue, scrollYProgress, value]);
-
-  return <div ref={ref}>{display}</div>;
-}
-
-/* ================= PAGE ================= */
-
 export default function Page() {
-  const { scrollYProgress } = useScroll();
-
   return (
     <main className="bg-main text-white">
 
-      {/* SCROLL PROGRESS */}
-      <motion.div
-        style={{ scaleX: scrollYProgress }}
-        className="fixed top-0 left-0 right-0 h-[2px] bg-white origin-left z-50"
-      />
-
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center px-6 pt-16 overflow-hidden">
+      <section className="relative min-h-screen flex items-center px-6 overflow-hidden">
         <div className="absolute inset-0 hero-bg opacity-40" />
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
           className="relative max-w-6xl mx-auto text-center"
         >
           <span className="uppercase text-xs tracking-[0.35em] text-gray-400">
@@ -83,7 +38,8 @@ export default function Page() {
           </h1>
 
           <p className="mt-8 text-gray-400 text-lg max-w-2xl mx-auto">
-            Velano engineers scalable digital systems for brands that operate seriously.
+            Velano builds precise, scalable digital systems for
+            brands that operate seriously.
           </p>
         </motion.div>
       </section>
@@ -91,37 +47,36 @@ export default function Page() {
       <Divider />
 
       {/* METRICS */}
-      <section className="px-6 py-28">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
-          <Metric label="Systems shipped" value={32} />
-          <Metric label="Performance gain (%)" value={68} />
-          <Metric label="Delivery speed increase (%)" value={54} />
+      <section className="px-6 py-24">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+          <Metric value="30+" label="Systems shipped" />
+          <Metric value="2–3×" label="Delivery speed" />
+          <Metric value="Long-term" label="Scalability focus" />
         </div>
       </section>
 
       <Divider />
 
-      {/* TIMELINE */}
-      <section className="px-6 py-28">
+      {/* PROCESS */}
+      <section className="px-6 py-24">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-20">
-            How Velano Operates
+          <h2 className="text-3xl font-bold text-center mb-16">
+            How Velano Works
           </h2>
 
-          <div className="space-y-16">
-            {timeline.map((t, i) => (
+          <div className="space-y-14">
+            {steps.map((s) => (
               <motion.div
-                key={t.title}
+                key={s.title}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                custom={i + 1}
                 className="relative pl-10"
               >
                 <div className="absolute left-0 top-2 w-3 h-3 rounded-full bg-white" />
-                <h3 className="text-xl font-semibold mb-3">{t.title}</h3>
-                <p className="text-gray-400">{t.desc}</p>
+                <h3 className="text-xl font-semibold mb-3">{s.title}</h3>
+                <p className="text-gray-400">{s.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -131,15 +86,18 @@ export default function Page() {
       <Divider />
 
       {/* CASES */}
-      <section className="px-6 py-28">
+      <section className="px-6 py-24">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">
+          <h2 className="text-3xl font-bold text-center mb-14">
             Proof of Execution
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {cases.map((c) => (
-              <div key={c.title} className="surface rounded-xl p-8 border border-white/10 depth">
+              <div
+                key={c.title}
+                className="surface rounded-xl p-8 border border-white/10 depth"
+              >
                 <span className="text-xs uppercase tracking-widest text-gray-500">
                   {c.type}
                 </span>
@@ -154,14 +112,14 @@ export default function Page() {
       <Divider />
 
       {/* CTA */}
-      <section className="px-6 py-32">
+      <section className="px-6 py-28">
         <div className="max-w-4xl mx-auto surface rounded-2xl p-14 text-center depth">
           <h2 className="text-3xl font-bold mb-6">
             Engage Velano
           </h2>
 
           <p className="text-gray-400 mb-10">
-            This is for teams that build for the long term.
+            Built for teams that value systems over shortcuts.
           </p>
 
           <a
@@ -177,47 +135,56 @@ export default function Page() {
   );
 }
 
-/* ================= COMPONENTS ================= */
+/* ===== HELPERS ===== */
 
 function Divider() {
   return <div className="divider" />;
 }
 
-function Metric({ label, value }: { label: string; value: number }) {
+function Metric({ value, label }: { value: string; label: string }) {
   return (
     <div className="surface rounded-xl p-10 depth">
-      <div className="text-5xl font-extrabold mb-3">
-        <CountUp value={value} />
-        <span className="accent">+</span>
-      </div>
+      <div className="text-4xl font-extrabold mb-3">{value}</div>
       <p className="text-gray-400">{label}</p>
     </div>
   );
 }
 
-/* ================= DATA ================= */
+/* ===== DATA ===== */
 
-const timeline = [
-  { title: "System Audit", desc: "Deep analysis of brand and constraints." },
-  { title: "Architecture Design", desc: "Structure engineered for scale." },
-  { title: "Engineering & Iteration", desc: "AI-assisted development." },
-  { title: "Launch & Optimization", desc: "Continuous improvement post-launch." },
+const steps = [
+  {
+    title: "System Audit",
+    desc: "We analyze brand, product, and technical constraints.",
+  },
+  {
+    title: "Architecture Design",
+    desc: "Clear structure engineered for longevity and scale.",
+  },
+  {
+    title: "Execution",
+    desc: "AI-accelerated development with human control.",
+  },
+  {
+    title: "Optimization",
+    desc: "Continuous refinement post-launch.",
+  },
 ];
 
 const cases = [
   {
     type: "SYSTEM BUILD",
-    title: "High-conversion brand platform",
-    desc: "Scalable architecture with optimized UX.",
+    title: "High-conversion platform",
+    desc: "Scalable architecture designed for growth.",
   },
   {
     type: "FRONT-END",
-    title: "Performance-critical web app",
-    desc: "UI rebuilt for speed and clarity.",
+    title: "Performance-critical UI",
+    desc: "Rebuilt for speed, clarity, and maintainability.",
   },
   {
     type: "AI WORKFLOW",
-    title: "AI delivery pipeline",
-    desc: "Faster delivery without quality loss.",
+    title: "AI-assisted delivery",
+    desc: "Faster execution without sacrificing quality.",
   },
 ];
