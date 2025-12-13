@@ -1,17 +1,54 @@
 "use client";
 
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, useMotionValue } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 /* ================= MOTION ================= */
 
-const fade = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i = 1) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
+    transition: {
+      delay: 0.1 * i,
+      duration: 0.7,
+      ease: "easeOut",
+    },
+  }),
 };
+
+/* ================= COUNT UP ================= */
+
+function CountUp({ value }: { value: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [display, setDisplay] = useState(0);
+  const motionValue = useMotionValue(0);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end center"],
+  });
+
+  useEffect(() => {
+    const unsubScroll = scrollYProgress.on("change", (latest) => {
+      motionValue.set(Math.floor(latest * value));
+    });
+
+    const unsubMotion = motionValue.on("change", (latest) => {
+      setDisplay(Math.min(latest, value));
+    });
+
+    return () => {
+      unsubScroll();
+      unsubMotion();
+    };
+  }, [motionValue, scrollYProgress, value]);
+
+  return <div ref={ref}>{display}</div>;
+}
+
+/* ================= PAGE ================= */
 
 export default function Page() {
   const { scrollYProgress } = useScroll();
@@ -19,207 +56,170 @@ export default function Page() {
   return (
     <main className="bg-main text-white">
 
-      {/* Scroll Authority Line */}
+      {/* SCROLL PROGRESS */}
       <motion.div
         style={{ scaleX: scrollYProgress }}
         className="fixed top-0 left-0 right-0 h-[2px] bg-white origin-left z-50"
       />
 
-      {/* ================= HERO ================= */}
-      <section className="min-h-screen flex items-center px-6 pt-16">
+      {/* NAVIGATION */}
+      <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur bg-black/50 border-b border-white/10">
+        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <span className="text-sm tracking-widest font-semibold">
+            VELANO
+          </span>
+
+          <div className="hidden md:flex gap-6 text-sm text-gray-400">
+            <a href="#systems" className="hover:text-white">Systems</a>
+            <a href="#process" className="hover:text-white">Process</a>
+            <a href="#pricing" className="hover:text-white">Pricing</a>
+            <a href="#proof" className="hover:text-white">Proof</a>
+            <a href="#contact" className="text-white">Contact</a>
+          </div>
+        </nav>
+      </header>
+
+      {/* HERO */}
+      <section className="min-h-screen flex items-center px-6 pt-16 text-center">
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fade}
-          className="max-w-6xl mx-auto text-center"
+          variants={fadeUp}
+          className="max-w-5xl mx-auto"
         >
           <span className="uppercase text-xs tracking-[0.35em] text-gray-400">
-            AVOLIRO / VELANO
+            An AVOLIRO Division
           </span>
 
           <h1 className="mt-6 text-5xl md:text-6xl font-extrabold leading-tight">
-            We don’t build websites.
-            <br />
-            We engineer digital systems<span className="accent">.</span>
+            Digital systems built
+            <br />for scale<span className="accent">.</span>
           </h1>
 
           <p className="mt-8 text-gray-400 text-lg max-w-2xl mx-auto">
-            Velano designs and engineers scalable, high-performance digital systems
-            for founders and teams who want long-term leverage — not quick fixes.
+            Velano engineers high-performance digital systems for brands
+            that care about longevity, clarity, and leverage.
           </p>
+
+          <div className="mt-12">
+            <a
+              href="#contact"
+              className="inline-block px-10 py-4 bg-white text-black font-semibold rounded-lg"
+            >
+              Start a conversation
+            </a>
+          </div>
         </motion.div>
       </section>
 
-      <Divider />
+      {/* SYSTEMS */}
+      <section id="systems" className="px-6 py-28">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-16">What We Engineer</h2>
 
-      {/* ================= PROBLEM ================= */}
-      <section className="px-6 py-28">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fade}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h2 className="text-3xl font-bold mb-6">
-            Most digital products fail for one reason.
-          </h2>
-
-          <p className="text-gray-400 text-lg leading-relaxed">
-            Fragmentation.
-            <br /><br />
-            Design happens in isolation.
-            Development follows blindly.
-            Growth is patched on later.
-            <br /><br />
-            The result is technical debt, weak positioning, and wasted spend.
-          </p>
-        </motion.div>
-      </section>
-
-      <Divider />
-
-      {/* ================= SOLUTION ================= */}
-      <section className="px-6 py-28">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-          >
-            <h2 className="text-3xl font-bold mb-6">
-              Velano fixes this by design.
-            </h2>
-
-            <p className="text-gray-400 leading-relaxed">
-              We engineer your interface, front-end architecture,
-              and delivery pipeline as one connected system.
-              <br /><br />
-              Every decision compounds.
-              Nothing is accidental.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-            className="surface rounded-2xl p-10 depth"
-          >
-            <ul className="space-y-4 text-gray-300">
-              <li>• Interface architecture aligned to brand</li>
-              <li>• Performance-first front-end engineering</li>
-              <li>• AI-accelerated but human-controlled delivery</li>
-              <li>• Systems built to scale, not be replaced</li>
-            </ul>
-          </motion.div>
-        </div>
-      </section>
-
-      <Divider />
-
-      {/* ================= PROCESS ================= */}
-      <section className="px-6 py-28">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-20">
-            How engagements work
-          </h2>
-
-          <div className="space-y-14">
-            {steps.map((step, i) => (
+          <div className="grid md:grid-cols-2 gap-8">
+            {systems.map((s, i) => (
               <motion.div
-                key={step.title}
+                key={s.title}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={fade}
-                className="pl-8 border-l border-white/10"
+                variants={fadeUp}
+                custom={i + 1}
+                className="surface p-8 rounded-xl border border-white/10 depth"
               >
-                <h3 className="text-xl font-semibold mb-3">
-                  {i + 1}. {step.title}
-                </h3>
-                <p className="text-gray-400">{step.desc}</p>
+                <h3 className="text-xl font-semibold mb-3">{s.title}</h3>
+                <p className="text-gray-400">{s.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <Divider />
-
-      {/* ================= FILTER ================= */}
-      <section className="px-6 py-28">
+      {/* PRICING PHILOSOPHY */}
+      <section id="pricing" className="px-6 py-28">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">
-            This is not for everyone.
-          </h2>
+          <h2 className="text-3xl font-bold mb-10">Pricing Philosophy</h2>
 
           <p className="text-gray-400 text-lg leading-relaxed">
-            Velano is not for rushed timelines, templates,
-            or price-shopping.
+            Velano does not sell fixed packages or templates.
             <br /><br />
-            It is for founders and teams who value clarity,
-            precision, and systems that compound over time.
+            Pricing is based on system complexity, scope,
+            and long-term value — not hours or pages.
+            <br /><br />
+            If you’re looking for the cheapest option,
+            Velano is not a fit.
+            <br />
+            If you’re looking for clarity, structure,
+            and leverage — we should talk.
           </p>
         </div>
       </section>
 
-      <Divider />
+      {/* METRICS */}
+      <section className="px-6 py-28">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
+          <Metric label="Systems shipped" value={32} />
+          <Metric label="Avg performance gain (%)" value={68} />
+          <Metric label="Delivery speed increase (%)" value={54} />
+        </div>
+      </section>
 
-      {/* ================= CTA ================= */}
+      {/* CTA */}
       <section id="contact" className="px-6 py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fade}
-          className="max-w-4xl mx-auto surface rounded-2xl p-14 text-center depth"
-        >
+        <div className="max-w-4xl mx-auto surface rounded-2xl p-14 text-center depth">
           <h2 className="text-3xl font-bold mb-6">
-            Start a serious conversation
+            Let’s Build Something Serious
           </h2>
 
           <p className="text-gray-400 mb-10">
-            If this resonates, reach out.
-            We’ll quickly determine fit.
+            Reach out if you’re building for the long term.
           </p>
 
           <a
             href="mailto:hello@velano.dev?subject=Project Inquiry"
-            className="inline-block px-14 py-4 rounded-lg bg-white text-black font-semibold hover:-translate-y-1 transition-transform"
+            className="inline-block px-14 py-4 rounded-lg bg-white text-black font-semibold"
           >
             Contact Velano
           </a>
-        </motion.div>
+        </div>
       </section>
 
     </main>
   );
 }
 
-/* ================= HELPERS ================= */
+/* ================= COMPONENTS ================= */
 
-function Divider() {
-  return <div className="divider" />;
+function Metric({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="surface rounded-xl p-10 depth">
+      <div className="text-5xl font-extrabold mb-3">
+        <CountUp value={value} />
+        <span className="accent">+</span>
+      </div>
+      <p className="text-gray-400">{label}</p>
+    </div>
+  );
 }
 
-const steps = [
+/* ================= DATA ================= */
+
+const systems = [
   {
-    title: "System audit",
-    desc: "We analyze brand, product, and technical constraints.",
+    title: "Interface Architecture",
+    desc: "Clear, scalable UI systems built for real products.",
   },
   {
-    title: "Architecture design",
-    desc: "A clear, scalable system is designed before writing code.",
+    title: "Front-End Engineering",
+    desc: "Performance-first engineering with long-term maintainability.",
   },
   {
-    title: "Engineering & iteration",
-    desc: "Fast, controlled execution with constant refinement.",
+    title: "AI-Accelerated Delivery",
+    desc: "Speed without sacrificing correctness or structure.",
   },
   {
-    title: "Launch & optimization",
-    desc: "Post-launch tuning and long-term evolution.",
+    title: "Scalable Codebases",
+    desc: "Systems designed to evolve, not collapse.",
   },
 ];
