@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== AVOLIRO TOKENS ===== */
+/* =========================
+   AVOLIRO DESIGN TOKENS
+========================= */
 :root {
   --bg-main: #0b0d10;
   --bg-surface: #111318;
@@ -10,6 +12,9 @@
   --accent: #e10600;
 }
 
+/* =========================
+   BASE
+========================= */
 html,
 body {
   height: 100%;
@@ -31,7 +36,9 @@ body {
   color: var(--accent);
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* =========================
+   TYPOGRAPHY
+========================= */
 @layer base {
   body {
     @apply leading-relaxed tracking-[-0.01em];
@@ -44,20 +51,51 @@ body {
   h2 {
     @apply tracking-[-0.03em];
   }
+
+  h3 {
+    @apply tracking-[-0.02em];
+  }
 }
 
-/* ===== DEPTH ===== */
+/* =========================
+   DEPTH
+========================= */
 .depth {
   box-shadow:
     0 30px 60px rgba(0, 0, 0, 0.55),
     inset 0 1px rgba(255, 255, 255, 0.04);
 }
 
-/* ===== HERO GRID ===== */
+/* =========================
+   CINEMATIC HERO GRID
+========================= */
 .hero-bg {
   background:
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+}
+
+/* =========================
+   STAGE 2 MICRO PHYSICS
+========================= */
+.card-physics {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s;
+}
+
+.card-physics:hover {
+  transform: translateY(-6px);
+}
+
+/* =========================
+   REDUCED MOTION SAFETY
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
