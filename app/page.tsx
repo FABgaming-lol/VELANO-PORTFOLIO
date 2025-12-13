@@ -22,17 +22,11 @@ export default function Page() {
     const html = document.documentElement;
     const newTheme = theme === "light" ? "dark" : "light";
 
-    if (newTheme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-
+    html.classList.toggle("dark", newTheme === "dark");
     localStorage.setItem("theme", newTheme);
     setTheme(newTheme);
   };
 
-  // Scroll reveal animations
   useEffect(() => {
     const items = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(
@@ -56,41 +50,67 @@ export default function Page() {
         aria-label="Toggle Theme"
       >
         <span
-          className={`flex items-center justify-center w-6 h-6 bg-white dark:bg-black rounded-full transform transition-transform duration-300 ${
+          className={`w-6 h-6 bg-white dark:bg-black rounded-full transform transition-transform duration-300 ${
             theme === "dark" ? "translate-x-6" : "translate-x-0"
           }`}
-        >
-          {theme === "dark" ? "🌙" : "☀️"}
-        </span>
+        />
       </button>
 
       {/* HERO */}
       <section className="section reveal text-center">
-        <h1 className="text-5xl font-extrabold leading-tight">
-          I build clean, bold & unforgettable digital experiences.
+        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight max-w-4xl mx-auto">
+          Digital systems built for
+          <br />
+          brands that refuse to look small.
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto mt-4">
-          Full-stack development + AI-accelerated workflows delivering premium results — fast.
+
+        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-lg">
+          Velano designs and engineers high-performance web experiences —
+          fast, precise, and built to scale.
         </p>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="section reveal flex flex-col items-center gap-6">
-        <img src="/wordmark.png" alt="VELANO wordmark" className="h-10 dark:invert" />
-        <p className="max-w-2xl text-gray-700 dark:text-gray-300 text-center leading-relaxed">
-          I code with AI — meaning faster delivery + top-tier results.<br />
-          I architect, refine and ship production-ready digital experiences.
+      {/* POSITIONING */}
+      <section className="section reveal text-center">
+        <p className="max-w-3xl mx-auto text-gray-700 dark:text-gray-300 leading-relaxed">
+          Most websites fail because they are fragmented — design without strategy,
+          code without intent, and growth without structure.
+          <br /><br />
+          Velano fixes this by building complete digital infrastructure,
+          not isolated features.
+        </p>
+      </section>
+
+      {/* CAPABILITIES */}
+      <section className="section reveal text-center">
+        <h2 className="text-3xl font-bold mb-8">What Velano Builds</h2>
+
+        <div className="max-w-3xl mx-auto grid gap-6 text-gray-700 dark:text-gray-300">
+          <p>• Brand-first web design with clear hierarchy</p>
+          <p>• Fast, scalable front-end systems</p>
+          <p>• AI-accelerated workflows without quality loss</p>
+          <p>• Clean architecture built for long-term growth</p>
+        </div>
+      </section>
+
+      {/* FILTER */}
+      <section className="section reveal text-center">
+        <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
+          Velano is not for people looking for cheap work or quick hacks.
+          <br />
+          It is for founders and teams who care about clarity, authority, and scale.
         </p>
       </section>
 
       {/* CONTACT */}
       <section id="contact" className="section reveal text-center">
-        <h2 className="text-3xl font-bold mb-6">Let’s Build Something</h2>
+        <h2 className="text-3xl font-bold mb-6">Request Access</h2>
+
         <a
-          href="mailto:hello@velano.dev?subject=New Project Inquiry"
-          className="inline-block px-8 py-4 rounded-lg bg-black dark:bg-white text-white dark:text-black transition-colors"
+          href="mailto:hello@velano.dev?subject=Project Inquiry"
+          className="inline-block px-10 py-4 rounded-lg bg-black dark:bg-white text-white dark:text-black font-semibold transition-colors"
         >
-          Contact Me
+          Start a Conversation
         </a>
       </section>
 
