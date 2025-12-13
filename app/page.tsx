@@ -1,11 +1,11 @@
 export default function Page() {
   return (
-    <main>
+    <main className="bg-main text-white">
 
       {/* HERO */}
       <section className="min-h-screen flex items-center px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <span className="uppercase text-sm tracking-widest text-gray-400">
+          <span className="uppercase text-xs tracking-[0.3em] text-gray-400">
             AVOLIRO / VELANO
           </span>
 
@@ -16,7 +16,7 @@ export default function Page() {
           </h1>
 
           <p className="mt-8 text-gray-400 text-lg max-w-2xl mx-auto">
-            Velano is an AVOLIRO division designing and building
+            Velano is an AVOLIRO division focused on building
             precise, scalable digital systems for brands
             that operate seriously.
           </p>
@@ -25,13 +25,16 @@ export default function Page() {
 
       <Divider />
 
-      {/* WHY */}
+      {/* PROBLEM */}
       <section className="px-6 py-24">
-        <div className="surface max-w-5xl mx-auto rounded-xl p-10 text-center">
+        <div className="max-w-5xl mx-auto surface rounded-2xl p-10 text-center">
+          <h2 className="text-2xl font-bold mb-6">
+            The problem isn’t design. It’s fragmentation.
+          </h2>
+
           <p className="text-gray-300 text-lg leading-relaxed">
-            Most digital products fail because they are fragmented —
-            design without structure, code without intent,
-            and growth without systems.
+            Most digital products fail because design, development,
+            and growth are handled in isolation.
             <br /><br />
             Velano eliminates fragmentation by engineering
             complete digital foundations from day one.
@@ -43,16 +46,28 @@ export default function Page() {
 
       {/* SYSTEMS */}
       <section className="px-6 py-24">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-12">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-14">
             What Velano Builds
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <SystemCard text="Brand-driven interface architecture" />
-            <SystemCard text="Performance-first front-end systems" />
-            <SystemCard text="AI-accelerated engineering workflows" />
-            <SystemCard text="Clean, scalable, maintainable codebases" />
+          <div className="grid md:grid-cols-2 gap-8">
+            <SystemCard
+              title="Interface Architecture"
+              desc="Brand-driven UI systems with clear hierarchy and intent."
+            />
+            <SystemCard
+              title="Front-End Engineering"
+              desc="Performance-first, scalable front-end systems."
+            />
+            <SystemCard
+              title="AI-Accelerated Delivery"
+              desc="Speed without compromise, powered by AI workflows."
+            />
+            <SystemCard
+              title="Scalable Codebases"
+              desc="Clean, maintainable systems built for long-term growth."
+            />
           </div>
         </div>
       </section>
@@ -67,8 +82,8 @@ export default function Page() {
             or cost-cutting compromises.
             <br />
             This is for teams that value
-            <span className="accent"> precision</span> and
-            long-term leverage.
+            <span className="accent"> precision</span>,
+            systems, and long-term leverage.
           </p>
         </div>
       </section>
@@ -77,10 +92,15 @@ export default function Page() {
 
       {/* CTA */}
       <section className="px-6 py-28">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">
+        <div className="max-w-4xl mx-auto text-center surface rounded-2xl p-12">
+          <h2 className="text-3xl font-bold mb-6">
             Engage Velano
           </h2>
+
+          <p className="text-gray-400 mb-8">
+            Start a serious conversation about building
+            systems that scale.
+          </p>
 
           <a
             href="mailto:hello@velano.dev?subject=Project Inquiry"
@@ -99,10 +119,17 @@ function Divider() {
   return <div className="divider" />;
 }
 
-function SystemCard({ text }: { text: string }) {
+function SystemCard({
+  title,
+  desc,
+}: {
+  title: string;
+  desc: string;
+}) {
   return (
-    <div className="surface rounded-xl p-6 text-gray-300 text-lg">
-      {text}
+    <div className="surface rounded-xl p-8 border border-white/10">
+      <h3 className="text-xl font-semibold mb-3">{title}</h3>
+      <p className="text-gray-400">{desc}</p>
     </div>
   );
 }
