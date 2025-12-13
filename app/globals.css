@@ -2,36 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  height: 100%;
-}
-
-/* Base typography */
-@layer base {
-  body {
-    @apply leading-relaxed tracking-[-0.01em];
-  }
-
-  h1 {
-    @apply tracking-[-0.03em];
-  }
-
-  h2 {
-    @apply tracking-[-0.02em];
-  }
-
-  h3 {
-    @apply tracking-[-0.015em];
-  }
-}
-
-/* AVOLIRO system tokens */
+/* =========================
+   AVOLIRO SYSTEM TOKENS
+========================= */
 :root {
   --bg-main: #0b0d10;
   --bg-surface: #111318;
   --border-subtle: rgba(255, 255, 255, 0.08);
   --accent: #e10600;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 .bg-main {
@@ -48,4 +31,52 @@ body {
 
 .accent {
   color: var(--accent);
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+@layer base {
+  body {
+    @apply leading-relaxed tracking-[-0.01em];
+  }
+
+  h1 {
+    @apply tracking-[-0.04em];
+  }
+
+  h2 {
+    @apply tracking-[-0.03em];
+  }
+
+  h3 {
+    @apply tracking-[-0.02em];
+  }
+}
+
+/* =========================
+   DEPTH
+========================= */
+.depth {
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* =========================
+   CINEMATIC HERO BACKGROUND
+========================= */
+.hero-bg {
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+}
+
+/* =========================
+   MAGNETIC INTERACTION
+========================= */
+.magnetic {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -10,7 +10,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "VELANO — An AVOLIRO Division",
   description:
-    "Velano, an AVOLIRO division, engineers scalable digital systems for serious brands.",
+    "Velano engineers scalable, high-performance digital systems under AVOLIRO.",
 };
 
 export default function RootLayout({
@@ -20,9 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-[#0B0D10] text-white antialiased`}
-      >
+      <body className={`${inter.className} bg-main text-white antialiased`}>
         {children}
       </body>
     </html>
