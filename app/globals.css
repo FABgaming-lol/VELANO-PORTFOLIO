@@ -2,23 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base reset */
 html,
 body {
   height: 100%;
 }
 
-/* Typography tuning */
+/* Base typography */
 @layer base {
   body {
     @apply leading-relaxed tracking-[-0.01em];
   }
 
   h1 {
-    @apply tracking-[-0.02em];
+    @apply tracking-[-0.025em];
   }
 
   h2 {
-    @apply tracking-[-0.015em];
+    @apply tracking-[-0.02em];
   }
+}
+
+/* AVOLIRO surfaces */
+.surface {
+  background-color: #111318;
+}
+
+/* AVOLIRO divider */
+.divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* AVOLIRO accent */
+.accent {
+  color: #e10600;
 }
