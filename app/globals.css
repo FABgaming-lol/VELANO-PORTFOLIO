@@ -3,12 +3,8 @@
 @tailwind utilities;
 
 /* -------------------------
-   Global foundation
+   Base
 -------------------------- */
-
-html {
-  scroll-behavior: smooth;
-}
 
 html,
 body {
@@ -16,13 +12,12 @@ body {
 }
 
 body {
-  transition:
-    background-color 0.35s ease,
-    color 0.35s ease;
+  background: #000;
+  color: #fff;
 }
 
 /* -------------------------
-   Typography (technical elite)
+   Typography
 -------------------------- */
 
 @layer base {
@@ -44,7 +39,7 @@ body {
 }
 
 /* -------------------------
-   Layout rhythm
+   Layout
 -------------------------- */
 
 .section {
@@ -52,54 +47,13 @@ body {
 }
 
 /* -------------------------
-   Reveal system
+   Tokens
 -------------------------- */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+.text-text-secondary {
+  color: #9ca3af;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* -------------------------
-   Interactions
--------------------------- */
-
-a,
-button {
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.2s ease;
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-/* -------------------------
-   Subtle depth
--------------------------- */
-
-.card {
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-}
-
-.dark .card:hover {
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+.border-border-subtle {
+  border-color: rgba(255, 255, 255, 0.12);
 }
