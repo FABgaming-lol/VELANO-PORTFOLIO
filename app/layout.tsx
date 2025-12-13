@@ -2,12 +2,22 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "VELANO — Full Stack Developer",
+  title: "VELANO — Digital Systems & Web Infrastructure",
   description:
-    "VELANO — full stack developer using AI-assisted workflows to build clean, bold and unforgettable digital experiences.",
+    "Velano designs and engineers high-performance digital systems for brands that value clarity, authority, and scale.",
+  metadataBase: new URL("https://velano.dev"),
+  openGraph: {
+    title: "VELANO",
+    description:
+      "High-performance digital systems built for brands that refuse to look small.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -16,15 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className="light" // Light theme default
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} transition-colors duration-300 bg-white text-black dark:bg-black dark:text-white`}
+        className={`${inter.className} bg-white text-black dark:bg-black dark:text-white transition-colors duration-300 antialiased`}
       >
-        {children}
+        {/* Global page wrapper */}
+        <div className="relative min-h-screen overflow-x-hidden">
+          {children}
+        </div>
       </body>
     </html>
   );
