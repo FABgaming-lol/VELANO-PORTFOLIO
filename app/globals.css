@@ -2,138 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global smooth scroll */
+/* -------------------------
+   Global foundation
+-------------------------- */
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Page fade-in */
+html,
+body {
+  height: 100%;
+}
+
 body {
   transition:
     background-color 0.35s ease,
     color 0.35s ease;
 }
 
-/* Scroll progress bar glow */
-#scrollProgress {
-  transition: width 0.1s linear;
-  box-shadow: 0 0 10px currentColor;
+/* -------------------------
+   Typography discipline
+-------------------------- */
+
+@layer base {
+  body {
+    @apply antialiased leading-relaxed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
 }
 
-/* Section reveal base */
-.reveal-section {
+/* -------------------------
+   Layout rhythm
+-------------------------- */
+
+.section {
+  @apply px-6 py-24 md:py-32;
+}
+
+/* -------------------------
+   Reveal animation (single system)
+-------------------------- */
+
+.reveal {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(28px);
   transition:
-    opacity 0.9s ease,
-    transform 0.9s ease;
+    opacity 0.8s ease,
+    transform 0.8s ease;
   will-change: opacity, transform;
 }
 
-.reveal-section.visible-section {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Staggered project card reveal */
-.project-card {
-  opacity: 0;
-  transform: translateY(26px);
+/* -------------------------
+   Interactive elements
+-------------------------- */
+
+a,
+button {
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-}
-
-.project-card.project-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Testimonials fade */
-.testimonial {
-  opacity: 0;
-  transform: translateY(8px);
-  position: absolute;
-  inset: 0;
-  padding: 22px 20px 26px;
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
-}
-
-.testimonial.active {
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-}
-
-/* Magnetic buttons */
-.btn-magnetic {
-  transition:
-    transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.25s,
-    color 0.25s,
-    border-color 0.25s;
-  will-change: transform;
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
 }
 
 button:active {
   transform: scale(0.97);
 }
 
-/* 3D hero wrapper */
-.hero-3d-shell {
-  perspective: 1400px;
-}
+/* -------------------------
+   Subtle depth (authority-safe)
+-------------------------- */
 
-.hero-3d-inner {
-  transform-style: preserve-3d;
+.card {
   transition:
-    transform 0.16s ease-out,
-    box-shadow 0.25s ease-out,
-    background 0.25s ease-out;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* Slight 3D hover on cards */
-.card-3d {
-  transition:
-    transform 0.2s ease-out,
-    box-shadow 0.24s ease-out,
-    border-color 0.24s ease-out,
-    background-color 0.24s ease-out;
-  transform-origin: center center;
-  will-change: transform, box-shadow;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
-.card-3d:hover {
-  transform: translateY(-6px) rotateX(4deg) rotateY(-3deg);
-  box-shadow:
-    0 22px 45px rgba(0, 0, 0, 0.26),
-    0 0 0 1px rgba(255, 255, 255, 0.02);
-}
+/* -------------------------
+   Dark mode tuning
+-------------------------- */
 
-/* Active nav link */
-.nav-link.active-link {
-  transform: translateY(-2px);
-  background: rgba(0, 0, 0, 0.04);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-/* Success checkmark animation */
-.check-path {
-  stroke-dasharray: 30;
-  stroke-dashoffset: 30;
-  animation: checkDraw 0.4s ease-out forwards;
-}
-
-@keyframes checkDraw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Layout */
-html,
-body {
-  height: 100%;
+.dark .card:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
 }
